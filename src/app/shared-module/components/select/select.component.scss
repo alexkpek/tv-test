@@ -1,0 +1,21 @@
+@import "src/styles/variables";
+
+:host {
+  position: relative;
+}
+
+.app-select {
+
+  &__items {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s $material-easing;
+
+    &--visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+

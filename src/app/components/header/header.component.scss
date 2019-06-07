@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  height: 74px;
+}
+
+.app-header {
+  height: 100%;
+  display: flex;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+  }
+}

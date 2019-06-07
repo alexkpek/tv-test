@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, HostBinding, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export interface SelectItem {
@@ -19,6 +19,8 @@ export interface SelectItem {
   ]
 })
 export class SelectComponent implements ControlValueAccessor {
+  @HostBinding('class.app-select') private baseClass = true;
+
   private onChange: (val: SelectItem) => void;
   private onTouch: () => void;
 
@@ -31,6 +33,16 @@ export class SelectComponent implements ControlValueAccessor {
   selectedItem: SelectItem;
   disabled: boolean;
   isVisible: boolean;
+
+  constructor(private $element: ElementRef) {}
+
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event) {
+    if (!this.$element.nativeElement.contains(event.target)) {
+      this.isVisible = false;
+    }
+  }
 
   get visibleLabel(): string {
     return this.selectedItem ? this.selectedItem.label : this.placeholder;
@@ -54,10 +66,12 @@ export class SelectComponent implements ControlValueAccessor {
 
   writeValue(val: SelectItem): void {
     this.selectedItem = val;
+    this.isVisible = false;
   }
 
   selectItem(item: SelectItem) {
     this.selectedItem = item;
+    this.isVisible = false;
     this.onChange(this.selectedItem);
   }
 }
