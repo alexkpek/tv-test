@@ -1,3 +1,8 @@
-<p>
-  select works!
-</p>
+<div class="app-select">
+  <div class="app-select__value" (click)="activateSelect()">{{ visibleLabel }}</div>
+
+  <ul class="app-select__items" [class.app-select__items--visible]="isVisible">
+    <li class="app-select__items-item" *ngFor="let item of items" (click)="selectItem(item)">{{ item.label }}</li>
+    <li class="app-select__items-reset" *ngIf="canReset" (click)="resetSelect.emit()">Сбросить выбор</li>
+  </ul>
+</div>

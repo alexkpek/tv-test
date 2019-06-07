@@ -3,8 +3,24 @@
     <app-tabs class="app-header__tabs"></app-tabs>
     <div class="app-header__spacer"></div>
     <div class="app-header__controls">
-      <app-select></app-select>
-      <app-select></app-select>
+      <app-select
+        name="filterChannels"
+        placeholder="Сортировка"
+        [ngModel]="orderBy"
+        (ngModelChange)="onOrderChange($event)"
+        (resetSelect)="onOrderReset()"
+        [items]="orders"
+        [canReset]="true"
+      ></app-select>
+      <app-select
+        name="filterChannels"
+        placeholder="Телеканалы"
+        [ngModel]="filterBy"
+        (ngModelChange)="onFilterChange($event)"
+        (resetSelect)="onFilterReset()"
+        [items]="filters"
+        [canReset]="true"
+      ></app-select>
     </div>
   </div>
 </header>

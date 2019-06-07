@@ -1,3 +1,4 @@
-<p>
-  tv-channels works!
-</p>
+<div>
+  <app-tv-channel *ngFor="let channel of tvChannels$ | async" [channel]="channel"></app-tv-channel>
+</div>
+
